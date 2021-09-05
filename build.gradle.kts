@@ -2,8 +2,8 @@ group = "com.jaewoo"
 version = "1.0-SNAPSHOT"
 
 
-val springBootVersion = "2.4.3"
 
+val swaggerVersion = "3.0.0"
 
 
 plugins {
@@ -88,6 +88,22 @@ subprojects {
     }
 }
 
+project(":service-api") {
+    apply(plugin = "org.springframework.boot")
+
+    dependencies {
+        implementation("org.springframework.boot:spring-boot-starter-web")
+        implementation("org.springframework.boot:spring-boot-starter-validation")
+        implementation("org.springframework.data:spring-data-commons")
+
+        // Swagger (API Document)
+        implementation("io.springfox:springfox-boot-starter:$swaggerVersion")
+        implementation("io.springfox:springfox-swagger-ui:$swaggerVersion")
+        implementation("io.swagger:swagger-annotations:1.6.2")
+        implementation("io.swagger:swagger-models:1.6.2")
+    }
+}
+
 project(":services:common") {
     apply(plugin = "org.springframework.boot")
 
@@ -99,6 +115,8 @@ project(":services:common") {
         implementation("org.springframework.boot:spring-boot-starter-data-jpa")
         implementation("org.springframework.boot:spring-boot-starter-validation")
         implementation("org.springframework.boot:spring-boot-starter-aop")
+
+        annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 
         // logging
         implementation("org.fusesource.jansi:jansi:1.8")
