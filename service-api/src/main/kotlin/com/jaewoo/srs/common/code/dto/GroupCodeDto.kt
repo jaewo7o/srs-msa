@@ -34,3 +34,9 @@ data class SearchGroupCodeRequest(
     @ApiParam(value = "검색어")
     var name: String?
 )
+
+data class GroupCodeResponse (
+    val groupCode: String,
+    val groupCodeNameKo: String,
+    val groupCodeNameEn: String
+)

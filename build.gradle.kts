@@ -4,6 +4,7 @@ version = "1.0-SNAPSHOT"
 
 
 val swaggerVersion = "3.0.0"
+val queryDslVersion = "4.2.1"
 
 
 plugins {
@@ -46,6 +47,8 @@ subprojects {
         implementation("org.jetbrains.kotlin:kotlin-reflect")
     }
 
+    var snippetsDir = file("build/generated-snippets")
+
     tasks {
         compileKotlin {
             kotlinOptions {
@@ -65,6 +68,7 @@ subprojects {
 
     tasks.withType<Test> {
         useJUnitPlatform()
+        outputs.dir(snippetsDir)
     }
 
     tasks.withType<Copy> {
@@ -86,6 +90,16 @@ subprojects {
             }
         }
     }
+
+//    sourceSets {
+//        kotlin.sourceSets.register("$buildDir/generated/source/kapt/main")
+//    }
+
+    configurations {
+        compileOnly {
+            extendsFrom(configurations.annotationProcessor.get())
+        }
+    }
 }
 
 project(":service-api") {
@@ -94,13 +108,16 @@ project(":service-api") {
     dependencies {
         implementation("org.springframework.boot:spring-boot-starter-web")
         implementation("org.springframework.boot:spring-boot-starter-validation")
-        implementation("org.springframework.data:spring-data-commons")
+        implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 
         // Swagger (API Document)
         implementation("io.springfox:springfox-boot-starter:$swaggerVersion")
         implementation("io.springfox:springfox-swagger-ui:$swaggerVersion")
         implementation("io.swagger:swagger-annotations:1.6.2")
         implementation("io.swagger:swagger-models:1.6.2")
+
+        implementation("org.springframework.boot:spring-boot-starter-test")
+        implementation("org.springframework.restdocs:spring-restdocs-mockmvc")
     }
 }
 
@@ -122,7 +139,17 @@ project(":services:common") {
         implementation("org.fusesource.jansi:jansi:1.8")
         implementation("org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16")
 
+        // Query DSL
+//        implementation("com.querydsl:querydsl-jpa")
+//        kapt("com.querydsl:querydsl-apt:$queryDslVersion:jpa")
+//        annotationProcessor(
+//            group = "com.querydsl", name = "querydsl-apt", classifier = "jpa"
+//        )
+
         // mariadb
         implementation("org.mariadb.jdbc:mariadb-java-client:2.4.1")
+
+        testImplementation("org.springframework.boot:spring-boot-starter-test")
+        testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
     }
 }
