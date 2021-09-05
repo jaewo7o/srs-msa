@@ -32,11 +32,11 @@ interface IGroupCodeApiController {
 
     @ApiOperation(value = "코드그룹 단건 수정")
     @PutMapping(value = ["$aBaseUrl/{groupCode}", "$baseUrl/{groupCode}"])
-    fun updateGroupCode(@PathVariable groupCode: String, @RequestBody dto: UpdateGroupCodeRequest): GroupCodeResponse
+    fun updateGroupCode(@PathVariable groupCode: String, dto: UpdateGroupCodeRequest): GroupCodeResponse
 
     @ApiOperation(value = "코드그룹 신규 생성")
     @PostMapping(value = [aBaseUrl, baseUrl])
-    fun createGroupCode(@RequestBody dto: CreateGroupCodeRequest): GroupCodeResponse
+    fun createGroupCode(dto: CreateGroupCodeRequest): GroupCodeResponse
 
     @ApiOperation(value = "코드그룹 삭제")
     @DeleteMapping(value = ["$aBaseUrl/{groupCode}", "$baseUrl/{groupCode}"])

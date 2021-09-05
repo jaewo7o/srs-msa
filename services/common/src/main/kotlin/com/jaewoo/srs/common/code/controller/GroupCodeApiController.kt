@@ -6,6 +6,7 @@ import com.jaewoo.srs.common.code.dto.SearchGroupCodeRequest
 import com.jaewoo.srs.common.code.dto.UpdateGroupCodeRequest
 import com.jaewoo.srs.common.code.service.GroupCodeService
 import org.springframework.data.domain.Pageable
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
@@ -24,7 +25,7 @@ class GroupCodeApiController(
         )
     }
 
-    override fun updateGroupCode(groupCode: String, dto: UpdateGroupCodeRequest): GroupCodeResponse {
+    override fun updateGroupCode(groupCode: String, @RequestBody dto: UpdateGroupCodeRequest): GroupCodeResponse {
         val groupCodeEntity = groupCodeService.updateGroupCode(groupCode, dto)
         return GroupCodeResponse (
             groupCodeEntity.groupCode,
@@ -33,7 +34,7 @@ class GroupCodeApiController(
         )
     }
 
-    override fun createGroupCode(dto: CreateGroupCodeRequest): GroupCodeResponse {
+    override fun createGroupCode(@RequestBody dto: CreateGroupCodeRequest): GroupCodeResponse {
         val groupCodeEntity = groupCodeService.createGroupCode(dto)
         return GroupCodeResponse (
             groupCodeEntity.groupCode,

@@ -2,6 +2,7 @@ package com.jaewoo.srs.common.code.controller
 
 import com.jaewoo.srs.common.code.builder.buildCreateGroupCodeRequest
 import com.jaewoo.srs.common.code.builder.buildGroupCode
+import com.jaewoo.srs.common.code.dto.CreateGroupCodeRequest
 import com.jaewoo.srs.common.code.dto.UpdateGroupCodeRequest
 import com.jaewoo.srs.common.code.repository.GroupCodeRepository
 import com.jaewoo.srs.core.exception.SrsDataNotFoundException

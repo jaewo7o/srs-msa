@@ -30,6 +30,7 @@ allprojects {
 }
 
 subprojects {
+    apply(plugin = "java")
     apply(plugin = "kotlin")
     apply(plugin = "io.spring.dependency-management")
 
@@ -41,10 +42,44 @@ subprojects {
         mavenCentral()
     }
 
+    the<io.spring.gradle.dependencymanagement.dsl.DependencyManagementExtension>().apply {
+        imports {
+            mavenBom(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES)
+        }
+    }
+
     dependencies {
         // Kotlin Dependency
         implementation(kotlin("stdlib"))
         implementation("org.jetbrains.kotlin:kotlin-reflect")
+
+        // Spring Boot
+        implementation("org.springframework.boot:spring-boot-starter-web")
+        implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+        implementation("org.springframework.boot:spring-boot-starter-validation")
+        implementation("org.springframework.boot:spring-boot-starter-aop")
+
+        // jackson library
+        implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+
+        // logging
+        implementation("org.fusesource.jansi:jansi:1.8")
+        implementation("org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16")
+
+        // Query DSL
+//        implementation("com.querydsl:querydsl-jpa")
+//        kapt("com.querydsl:querydsl-apt:$queryDslVersion:jpa")
+//        annotationProcessor(
+//            group = "com.querydsl", name = "querydsl-apt", classifier = "jpa"
+//        )
+
+        kapt("org.springframework.boot:spring-boot-configuration-processor")
+
+        // mariadb
+        implementation("org.mariadb.jdbc:mariadb-java-client:2.4.1")
+
+        testImplementation("org.springframework.boot:spring-boot-starter-test")
+        testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
     }
 
     var snippetsDir = file("build/generated-snippets")
@@ -103,18 +138,18 @@ subprojects {
 }
 
 project(":service-api") {
-    apply(plugin = "org.springframework.boot")
-
     dependencies {
-        implementation("org.springframework.boot:spring-boot-starter-web")
-        implementation("org.springframework.boot:spring-boot-starter-validation")
-        implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-
         // Swagger (API Document)
         implementation("io.springfox:springfox-boot-starter:$swaggerVersion")
         implementation("io.springfox:springfox-swagger-ui:$swaggerVersion")
         implementation("io.swagger:swagger-annotations:1.6.2")
         implementation("io.swagger:swagger-models:1.6.2")
+    }
+}
+
+project(":service-api-test") {
+    dependencies {
+        implementation(project(":service-api"))
 
         implementation("org.springframework.boot:spring-boot-starter-test")
         implementation("org.springframework.restdocs:spring-restdocs-mockmvc")
@@ -126,30 +161,6 @@ project(":services:common") {
 
     dependencies {
         implementation(project(":service-api"))
-
-        // Spring Boot
-        implementation("org.springframework.boot:spring-boot-starter-web")
-        implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-        implementation("org.springframework.boot:spring-boot-starter-validation")
-        implementation("org.springframework.boot:spring-boot-starter-aop")
-
-        annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
-
-        // logging
-        implementation("org.fusesource.jansi:jansi:1.8")
-        implementation("org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16")
-
-        // Query DSL
-//        implementation("com.querydsl:querydsl-jpa")
-//        kapt("com.querydsl:querydsl-apt:$queryDslVersion:jpa")
-//        annotationProcessor(
-//            group = "com.querydsl", name = "querydsl-apt", classifier = "jpa"
-//        )
-
-        // mariadb
-        implementation("org.mariadb.jdbc:mariadb-java-client:2.4.1")
-
-        testImplementation("org.springframework.boot:spring-boot-starter-test")
-        testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
+        testImplementation(project(":service-api-test"))
     }
 }
