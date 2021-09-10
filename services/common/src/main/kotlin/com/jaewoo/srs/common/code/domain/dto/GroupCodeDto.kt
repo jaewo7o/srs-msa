@@ -1,5 +1,6 @@
-package com.jaewoo.srs.common.code.dto
+package com.jaewoo.srs.common.code.domain.dto
 
+import com.jaewoo.srs.common.code.domain.entity.GroupCode
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
 import io.swagger.annotations.ApiParam
@@ -17,7 +18,13 @@ data class CreateGroupCodeRequest(
 
     @ApiModelProperty(value = "그룹코드 영문명", required = false, example = "Message Type")
     val groupCodeNameEn: String
-)
+) {
+    fun toEntity() = GroupCode(
+        groupCode = this.groupCode,
+        groupCodeNameKo = this.groupCodeNameKo,
+        groupCodeNameEn = this.groupCodeNameEn
+    )
+}
 
 @ApiModel(description = "그룹코드 수정요청")
 data class UpdateGroupCodeRequest(

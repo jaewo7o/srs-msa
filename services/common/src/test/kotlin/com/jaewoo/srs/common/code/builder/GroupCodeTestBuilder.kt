@@ -1,7 +1,7 @@
 package com.jaewoo.srs.common.code.builder
 
-import com.jaewoo.srs.common.code.dto.CreateGroupCodeRequest
-import com.jaewoo.srs.common.code.entity.GroupCode
+import com.jaewoo.srs.common.code.domain.dto.CreateGroupCodeRequest
+import com.jaewoo.srs.common.code.domain.entity.GroupCode
 
 fun buildCreateGroupCodeRequest(
     groupCode: String = "groupCode",

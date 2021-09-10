@@ -66,12 +66,18 @@ subprojects {
         implementation("org.fusesource.jansi:jansi:1.8")
         implementation("org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16")
 
+        // Swagger (API Document)
+        implementation("io.springfox:springfox-boot-starter:$swaggerVersion")
+        implementation("io.springfox:springfox-swagger-ui:$swaggerVersion")
+        implementation("io.swagger:swagger-annotations:1.6.2")
+        implementation("io.swagger:swagger-models:1.6.2")
+
         // Query DSL
-//        implementation("com.querydsl:querydsl-jpa")
-//        kapt("com.querydsl:querydsl-apt:$queryDslVersion:jpa")
-//        annotationProcessor(
-//            group = "com.querydsl", name = "querydsl-apt", classifier = "jpa"
-//        )
+        implementation("com.querydsl:querydsl-jpa")
+        kapt("com.querydsl:querydsl-apt:$queryDslVersion:jpa")
+        annotationProcessor(
+            group = "com.querydsl", name = "querydsl-apt", classifier = "jpa"
+        )
 
         kapt("org.springframework.boot:spring-boot-configuration-processor")
 
@@ -137,19 +143,15 @@ subprojects {
     }
 }
 
-project(":service-api") {
+project(":services:api-core") {
     dependencies {
-        // Swagger (API Document)
-        implementation("io.springfox:springfox-boot-starter:$swaggerVersion")
-        implementation("io.springfox:springfox-swagger-ui:$swaggerVersion")
-        implementation("io.swagger:swagger-annotations:1.6.2")
-        implementation("io.swagger:swagger-models:1.6.2")
+
     }
 }
 
-project(":service-api-test") {
+project(":services:api-test") {
     dependencies {
-        implementation(project(":service-api"))
+        implementation(project(":services:api-core"))
 
         implementation("org.springframework.boot:spring-boot-starter-test")
         implementation("org.springframework.restdocs:spring-restdocs-mockmvc")
@@ -160,7 +162,7 @@ project(":services:common") {
     apply(plugin = "org.springframework.boot")
 
     dependencies {
-        implementation(project(":service-api"))
-        testImplementation(project(":service-api-test"))
+        implementation(project(":services:api-core"))
+        testImplementation(project(":services:api-test"))
     }
 }

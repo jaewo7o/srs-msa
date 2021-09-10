@@ -1,49 +1,48 @@
 package com.jaewoo.srs.common.code.controller
 
-import com.jaewoo.srs.common.code.dto.CreateGroupCodeRequest
-import com.jaewoo.srs.common.code.dto.GroupCodeResponse
-import com.jaewoo.srs.common.code.dto.SearchGroupCodeRequest
-import com.jaewoo.srs.common.code.dto.UpdateGroupCodeRequest
+import com.jaewoo.srs.common.code.domain.dto.CreateGroupCodeRequest
+import com.jaewoo.srs.common.code.domain.dto.GroupCodeResponse
+import com.jaewoo.srs.common.code.domain.dto.SearchGroupCodeRequest
+import com.jaewoo.srs.common.code.domain.dto.UpdateGroupCodeRequest
 import com.jaewoo.srs.common.code.service.GroupCodeService
+import io.swagger.annotations.ApiOperation
 import org.springframework.data.domain.Pageable
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 class GroupCodeApiController(
     private val groupCodeService: GroupCodeService
-) : IGroupCodeApiController {
-//    override fun searchGroupCodesPageable(dto: SearchGroupCodeRequest, pageable: Pageable) =
-//        groupCodeService.searchGroupCodesPageable(dto, pageable)
-
-    override fun getGroupCode(groupCode: String): GroupCodeResponse {
-        val groupCodeEntity = groupCodeService.getGroupCode(groupCode)
-        return GroupCodeResponse (
-            groupCodeEntity.groupCode,
-            groupCodeEntity.groupCodeNameKo,
-            groupCodeEntity.groupCodeNameEn
-        )
+) {
+    companion object {
+        const val baseUrl = "/api/group-codes"
+        const val aBaseUrl = "/api/anonymous/group-codes"
     }
 
-    override fun updateGroupCode(groupCode: String, @RequestBody dto: UpdateGroupCodeRequest): GroupCodeResponse {
-        val groupCodeEntity = groupCodeService.updateGroupCode(groupCode, dto)
-        return GroupCodeResponse (
-            groupCodeEntity.groupCode,
-            groupCodeEntity.groupCodeNameKo,
-            groupCodeEntity.groupCodeNameEn
-        )
-    }
+    @ApiOperation(value = "코드그룹 검색")
+    @GetMapping(value = [aBaseUrl, baseUrl])
+    fun searchGroupCodesPageable(dto: SearchGroupCodeRequest, pageable: Pageable) =
+        groupCodeService.searchGroupCodesPageable(dto, pageable)
 
-    override fun createGroupCode(@RequestBody dto: CreateGroupCodeRequest): GroupCodeResponse {
-        val groupCodeEntity = groupCodeService.createGroupCode(dto)
-        return GroupCodeResponse (
-            groupCodeEntity.groupCode,
-            groupCodeEntity.groupCodeNameKo,
-            groupCodeEntity.groupCodeNameEn
-        )
-    }
+    @ApiOperation(value = "코드그룹 단건 조회")
+    @GetMapping(value = ["$aBaseUrl/{groupCode}", "$baseUrl/{groupCode}"])
+    fun getGroupCode(@PathVariable groupCode: String)
+        = groupCodeService.getGroupCode(groupCode).toDto()
 
-    override fun deleteGroupCode(groupCode: String) {
+
+    @ApiOperation(value = "코드그룹 단건 수정")
+    @PutMapping(value = ["$aBaseUrl/{groupCode}", "$baseUrl/{groupCode}"])
+    fun updateGroupCode(@PathVariable groupCode: String, @RequestBody dto: UpdateGroupCodeRequest)
+        = groupCodeService.updateGroupCode(groupCode, dto).toDto()
+
+    @ApiOperation(value = "코드그룹 신규 생성")
+    @PostMapping(value = [aBaseUrl, baseUrl])
+    fun createGroupCode(@RequestBody dto: CreateGroupCodeRequest)
+        = groupCodeService.createGroupCode(dto).toDto()
+
+
+    @ApiOperation(value = "코드그룹 삭제")
+    @DeleteMapping(value = ["$aBaseUrl/{groupCode}", "$baseUrl/{groupCode}"])
+    fun deleteGroupCode(@PathVariable groupCode: String) {
         groupCodeService.deleteGroupCode(groupCode)
     }
 }

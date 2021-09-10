@@ -1,5 +1,6 @@
-package com.jaewoo.srs.common.code.entity
+package com.jaewoo.srs.common.code.domain.entity
 
+import com.jaewoo.srs.common.code.domain.dto.GroupCodeResponse
 import com.jaewoo.srs.core.jpa.BaseEntity
 import javax.persistence.Column
 import javax.persistence.Entity
@@ -18,4 +19,10 @@ class GroupCode(
 
     @Column(name = "groupCodeNameEn")
     var groupCodeNameEn: String
-) : BaseEntity()
+) : BaseEntity() {
+    fun toDto() = GroupCodeResponse(
+        groupCode = this.groupCode,
+        groupCodeNameKo = this.groupCodeNameKo,
+        groupCodeNameEn = this.groupCodeNameEn
+    )
+}
