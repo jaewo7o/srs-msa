@@ -1,10 +1,6 @@
-group = "com.jaewoo"
-version = "1.0-SNAPSHOT"
-
-
-
 val swaggerVersion = "3.0.0"
 val queryDslVersion = "4.2.1"
+val springCloudVersion = "2020.0.3"
 
 
 plugins {
@@ -55,9 +51,11 @@ subprojects {
 
         // Spring Boot
         implementation("org.springframework.boot:spring-boot-starter-web")
-        implementation("org.springframework.boot:spring-boot-starter-data-jpa")
         implementation("org.springframework.boot:spring-boot-starter-validation")
         implementation("org.springframework.boot:spring-boot-starter-aop")
+
+        // note that the BOM coordinates are wrapped with the "platform" keyword
+        implementation(platform("org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"))
 
         // jackson library
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
@@ -72,23 +70,11 @@ subprojects {
         implementation("io.swagger:swagger-annotations:1.6.2")
         implementation("io.swagger:swagger-models:1.6.2")
 
-        // Query DSL
-        implementation("com.querydsl:querydsl-jpa")
-        kapt("com.querydsl:querydsl-apt:$queryDslVersion:jpa")
-        annotationProcessor(
-            group = "com.querydsl", name = "querydsl-apt", classifier = "jpa"
-        )
-
-        kapt("org.springframework.boot:spring-boot-configuration-processor")
-
-        // mariadb
-        implementation("org.mariadb.jdbc:mariadb-java-client:2.4.1")
-
         testImplementation("org.springframework.boot:spring-boot-starter-test")
         testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
     }
 
-    var snippetsDir = file("build/generated-snippets")
+    val snippetsDir = file("build/generated-snippets")
 
     tasks {
         compileKotlin {
@@ -143,9 +129,26 @@ subprojects {
     }
 }
 
+project(":cloud:eureka") {
+    apply(plugin = "org.springframework.boot")
+
+    dependencies {
+        implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-server")
+
+        implementation("org.glassfish.jaxb:jaxb-runtime")
+    }
+}
+
 project(":services:api-core") {
     dependencies {
+        implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 
+        // Query DSL
+        implementation("com.querydsl:querydsl-jpa")
+        kapt("com.querydsl:querydsl-apt:$queryDslVersion:jpa")
+        annotationProcessor(
+            group = "com.querydsl", name = "querydsl-apt", classifier = "jpa"
+        )
     }
 }
 
@@ -164,5 +167,19 @@ project(":services:common") {
     dependencies {
         implementation(project(":services:api-core"))
         testImplementation(project(":services:api-test"))
+
+        implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+
+        implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
+
+        // Query DSL
+        implementation("com.querydsl:querydsl-jpa")
+        kapt("com.querydsl:querydsl-apt:$queryDslVersion:jpa")
+        annotationProcessor(
+            group = "com.querydsl", name = "querydsl-apt", classifier = "jpa"
+        )
+
+        // mariadb
+        implementation("org.mariadb.jdbc:mariadb-java-client:2.4.1")
     }
 }
