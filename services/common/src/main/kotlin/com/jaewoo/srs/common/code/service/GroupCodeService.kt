@@ -4,9 +4,7 @@ import com.jaewoo.srs.common.code.domain.dto.CreateGroupCodeRequest
 import com.jaewoo.srs.common.code.domain.dto.SearchGroupCodeRequest
 import com.jaewoo.srs.common.code.domain.dto.UpdateGroupCodeRequest
 import com.jaewoo.srs.common.code.domain.entity.GroupCode
-import com.jaewoo.srs.common.code.repository.GroupCodePredicator
 import com.jaewoo.srs.common.code.repository.GroupCodeRepository
-import com.jaewoo.srs.common.code.repository.GroupCodeRepositorySupport
 import com.jaewoo.srs.core.exception.SrsDataNotFoundException
 import com.jaewoo.srs.core.exception.SrsRuntimeException
 import org.springframework.data.domain.Pageable
@@ -14,15 +12,10 @@ import org.springframework.stereotype.Service
 
 @Service
 class GroupCodeService(
-    private val groupCodeRepository: GroupCodeRepository,
-    private val groupCodeRepositorySupport: GroupCodeRepositorySupport
+    private val groupCodeRepository: GroupCodeRepository
 ) {
     fun searchGroupCodesPageable(dto: SearchGroupCodeRequest, pageable: Pageable): Any {
-        val predicate = GroupCodePredicator()
-            .name(dto.name)
-            .value()
-
-        return groupCodeRepositorySupport.findAllPage(predicate, pageable)
+        return groupCodeRepository.findAllPage(dto, pageable)
     }
 
     fun getGroupCode(groupCode: String)

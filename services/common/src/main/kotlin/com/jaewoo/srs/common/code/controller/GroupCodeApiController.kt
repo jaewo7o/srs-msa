@@ -5,10 +5,15 @@ import com.jaewoo.srs.common.code.domain.dto.GroupCodeResponse
 import com.jaewoo.srs.common.code.domain.dto.SearchGroupCodeRequest
 import com.jaewoo.srs.common.code.domain.dto.UpdateGroupCodeRequest
 import com.jaewoo.srs.common.code.service.GroupCodeService
+import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import org.springframework.data.domain.Pageable
 import org.springframework.web.bind.annotation.*
 
+@Api(
+    tags = ["Code"],
+    description = "공통코드 - 그룹코드"
+)
 @RestController
 class GroupCodeApiController(
     private val groupCodeService: GroupCodeService
