@@ -49,11 +49,6 @@ subprojects {
         implementation(kotlin("stdlib"))
         implementation("org.jetbrains.kotlin:kotlin-reflect")
 
-        // Spring Boot
-        implementation("org.springframework.boot:spring-boot-starter-web")
-        implementation("org.springframework.boot:spring-boot-starter-validation")
-        implementation("org.springframework.boot:spring-boot-starter-aop")
-
         // note that the BOM coordinates are wrapped with the "platform" keyword
         implementation(platform("org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"))
 
@@ -139,8 +134,22 @@ project(":cloud:eureka") {
     }
 }
 
+project(":cloud:gateway") {
+    apply(plugin = "org.springframework.boot")
+
+    dependencies {
+        implementation("org.springframework.cloud:spring-cloud-starter-gateway")
+
+        implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
+    }
+}
+
 project(":services:api-core") {
     dependencies {
+        // Spring Boot
+        implementation("org.springframework.boot:spring-boot-starter-web")
+        implementation("org.springframework.boot:spring-boot-starter-validation")
+        implementation("org.springframework.boot:spring-boot-starter-aop")
         implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 
         // Query DSL
@@ -168,6 +177,10 @@ project(":services:common") {
         implementation(project(":services:api-core"))
         testImplementation(project(":services:api-test"))
 
+        // Spring Boot
+        implementation("org.springframework.boot:spring-boot-starter-web")
+        implementation("org.springframework.boot:spring-boot-starter-validation")
+        implementation("org.springframework.boot:spring-boot-starter-aop")
         implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 
         implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
