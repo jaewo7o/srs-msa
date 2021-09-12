@@ -4,6 +4,7 @@ import com.jaewoo.srs.common.code.builder.buildCreateGroupCodeRequest
 import com.jaewoo.srs.common.code.builder.buildGroupCode
 import com.jaewoo.srs.common.code.domain.dto.UpdateGroupCodeRequest
 import com.jaewoo.srs.common.code.repository.GroupCodeRepository
+import com.jaewoo.srs.common.constant.CommonConstant.Companion.API_URL
 import com.jaewoo.srs.core.exception.SrsDataNotFoundException
 import com.jaewoo.srs.core.test.SpringWebTestSupport
 import org.assertj.core.api.Assertions
@@ -18,7 +19,7 @@ internal class GroupCodeApiControllerTest (
     private val groupCodeRepository: GroupCodeRepository
 ) : SpringWebTestSupport() {
 
-    val baseUrl = "/api/anonymous/group-codes"
+    val baseUrl = "${API_URL}/group-codes"
 
     @Test
     @Transactional

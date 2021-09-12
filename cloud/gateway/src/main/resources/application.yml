@@ -1,7 +1,21 @@
 server:
     port: 8080
+    ssl:
+        key-store-type: PKCS12
+        key-store: classpath:keystore/gateway-local.p12
+        key-store-password: Touchme7!!
+        key-alias: localhost
 
 spring:
+    application:
+        name: gateway
+    cloud:
+        gateway:
+            routes:
+                - id: common
+                  uri: lb://common
+                  predicates:
+                      - Path=/common/**
     output:
         ansi:
             enabled: always
@@ -17,3 +31,8 @@ eureka:
         leaseExpirationDurationInSeconds: 5
 
 management.endpoints.web.exposure.include: "*"
+
+logging:
+    level:
+        root: INFO
+        com.jaewoo.srs.cloud: DEBUG

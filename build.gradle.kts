@@ -1,5 +1,5 @@
 val swaggerVersion = "3.0.0"
-val queryDslVersion = "4.2.1"
+val queryDslVersion = "4.4.0"
 val springCloudVersion = "2020.0.3"
 
 
@@ -165,6 +165,7 @@ project(":services:api-test") {
     dependencies {
         implementation(project(":services:api-core"))
 
+        implementation("org.springframework.boot:spring-boot-starter-data-jpa")
         implementation("org.springframework.boot:spring-boot-starter-test")
         implementation("org.springframework.restdocs:spring-restdocs-mockmvc")
     }
