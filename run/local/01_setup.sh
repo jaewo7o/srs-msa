@@ -1,10 +1,10 @@
 docker network create srs-network
 
-docker run -d --rm \
-      --name redis \
-      -p 6379:6379 \
-      --network srs-network \
-      redis
+#docker run -d --rm \
+#      --name redis \
+#      -p 6379:6379 \
+#      --network srs-network \
+#      redis
 
 docker run -d --rm \
       --name mariadb \

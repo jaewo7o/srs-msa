@@ -2,12 +2,15 @@ server:
     port: 8081
 
 spring:
+    profiles:
+        active: local
     application:
         name: common
-    data:
-        redis:
-            repositories:
-                enabled: true
+    devtools:
+        livereload:
+            enabled: true
+        restart:
+            enabled: true
     jpa:
         database: mysql
         database-platform: org.hibernate.dialect.MariaDB103Dialect

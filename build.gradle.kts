@@ -1,3 +1,5 @@
+import org.springframework.boot.gradle.tasks.run.BootRun
+
 val swaggerVersion = "3.0.0"
 val queryDslVersion = "4.4.0"
 val springCloudVersion = "2020.0.3"
@@ -98,6 +100,10 @@ subprojects {
     }
 
     val profile = if (project.hasProperty("profile")) project.property("profile") else "local"
+    tasks.withType<BootRun> {
+        println("##activeProfile : $profile")
+        systemProperty("spring.profiles.active", profile!!)
+    }
 
     sourceSets {
         main {
