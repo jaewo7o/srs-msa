@@ -61,11 +61,6 @@ subprojects {
         implementation("org.fusesource.jansi:jansi:1.8")
         implementation("org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16")
 
-        // Swagger (API Document)
-        implementation("io.springfox:springfox-boot-starter:$swaggerVersion")
-        implementation("io.springfox:springfox-swagger-ui:$swaggerVersion")
-        implementation("io.swagger:swagger-annotations:1.6.2")
-        implementation("io.swagger:swagger-models:1.6.2")
 
         testImplementation("org.springframework.boot:spring-boot-starter-test")
         testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
@@ -158,6 +153,10 @@ project(":services:api-core") {
         implementation("org.springframework.boot:spring-boot-starter-aop")
         implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 
+        // Swagger (API Document)
+        implementation("io.springfox:springfox-boot-starter:$swaggerVersion")
+        implementation("org.springdoc:springdoc-openapi-ui:1.4.1")
+
         // Query DSL
         implementation("com.querydsl:querydsl-jpa")
         kapt("com.querydsl:querydsl-apt:$queryDslVersion:jpa")
@@ -191,6 +190,13 @@ project(":services:common") {
         implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 
         implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
+
+        // Swagger (API Document)
+        implementation("io.springfox:springfox-boot-starter:$swaggerVersion")
+        implementation("org.springdoc:springdoc-openapi-ui:1.4.1")
+//        implementation("io.springfox:springfox-swagger-ui:$swaggerVersion")
+//        implementation("io.swagger:swagger-annotations:1.6.2")
+//        implementation("io.swagger:swagger-models:1.6.2")
 
         // Query DSL
         implementation("com.querydsl:querydsl-jpa")
