@@ -41,7 +41,7 @@ class SwaggerConfig(
             .directModelSubstitute(YearMonth::class.java, String::class.java)
             .select()
             .apis(RequestHandlerSelectors.any())
-            .paths(PathSelectors.ant("/api/**"))
+            .paths(PathSelectors.ant("/common/api/**"))
             .build()
             .useDefaultResponseMessages(false)
             .globalResponses(HttpMethod.GET, listOf(res404))
