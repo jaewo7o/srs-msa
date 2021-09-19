@@ -1,6 +1,6 @@
 import org.springframework.boot.gradle.tasks.run.BootRun
 
-val swaggerVersion = "3.0.0"
+val springDocVersion = "1.5.10"
 val queryDslVersion = "4.4.0"
 val springCloudVersion = "2020.0.3"
 
@@ -96,7 +96,6 @@ subprojects {
 
     val profile = if (project.hasProperty("profile")) project.property("profile") else "local"
     tasks.withType<BootRun> {
-        println("##activeProfile : $profile")
         systemProperty("spring.profiles.active", profile!!)
     }
 
@@ -142,6 +141,9 @@ project(":cloud:gateway") {
         implementation("org.springframework.cloud:spring-cloud-starter-gateway")
 
         implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
+
+        // SpringDoc (API Document)
+        implementation("org.springdoc:springdoc-openapi-webflux-ui:$springDocVersion")
     }
 }
 
@@ -153,9 +155,8 @@ project(":services:api-core") {
         implementation("org.springframework.boot:spring-boot-starter-aop")
         implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 
-        // Swagger (API Document)
-        implementation("io.springfox:springfox-boot-starter:$swaggerVersion")
-        implementation("org.springdoc:springdoc-openapi-ui:1.4.1")
+        // SpringDoc (API Document)
+        implementation("org.springdoc:springdoc-openapi-ui:$springDocVersion")
 
         // Query DSL
         implementation("com.querydsl:querydsl-jpa")
@@ -191,12 +192,8 @@ project(":services:common") {
 
         implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
 
-        // Swagger (API Document)
-        implementation("io.springfox:springfox-boot-starter:$swaggerVersion")
-        implementation("org.springdoc:springdoc-openapi-ui:1.4.1")
-//        implementation("io.springfox:springfox-swagger-ui:$swaggerVersion")
-//        implementation("io.swagger:swagger-annotations:1.6.2")
-//        implementation("io.swagger:swagger-models:1.6.2")
+        // SpringDoc (API Document)
+        implementation("org.springdoc:springdoc-openapi-ui:$springDocVersion")
 
         // Query DSL
         implementation("com.querydsl:querydsl-jpa")

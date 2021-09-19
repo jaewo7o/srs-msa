@@ -6,10 +6,10 @@ spring:
         password: srs123!!
         sql-script-encoding: UTF-8
 
-eureka:
-    client:
-        register-with-eureka: false
-        fetch-registry: false
+#eureka:
+#    client:
+#        register-with-eureka: true
+#        fetch-registry: true
 
 logging:
     config: classpath:logback-local.xml
