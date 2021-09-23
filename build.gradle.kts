@@ -139,8 +139,10 @@ project(":cloud:gateway") {
 
     dependencies {
         implementation("org.springframework.cloud:spring-cloud-starter-gateway")
-
         implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
+
+        // Spring Boot Actuator
+        implementation("org.springframework.boot:spring-boot-starter-actuator")
 
         // SpringDoc (API Document)
         implementation("org.springdoc:springdoc-openapi-webflux-ui:$springDocVersion")

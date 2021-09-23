@@ -1,10 +1,5 @@
 server:
     port: 8080
-    ssl:
-        key-store-type: PKCS12
-        key-store: classpath:keystore/gateway-local.p12
-        key-store-password: Touchme7!!
-        key-alias: localhost
 
 spring:
     application:
@@ -16,8 +11,6 @@ spring:
                   uri: lb://common-service
                   predicates:
                     - Path=/common/**
-                  filters:
-                    - RewritePath=/common/(?<path>.*), /$\{path}
                 - id: openapi
                   uri: http://localhost:${server.port}
                   predicates:
@@ -29,7 +22,11 @@ spring:
         ansi:
             enabled: always
 
-management.endpoints.web.exposure.include: "*"
+management:
+    endpoints:
+        web:
+            exposure:
+                include: gateway
 
 logging:
     level:

@@ -1,3 +1,8 @@
+management:
+    endpoint:
+        gateway:
+            enabled: true # default: true
+
 eureka:
     client:
         serviceUrl:
