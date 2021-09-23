@@ -1,3 +1,5 @@
+docker stop admin;
+
 docker stop gateway;
 
 docker stop eureka;
@@ -9,6 +11,7 @@ docker stop mongo;
 docker stop maria;
 
 
+docker rmi admin;
 
 docker rmi gateway;
 

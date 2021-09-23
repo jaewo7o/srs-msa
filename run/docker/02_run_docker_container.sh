@@ -21,6 +21,12 @@ docker run -d --rm \
 #      -v ~/dev/data/mongo/:/data/db \
 #      mongo
 
+docker run -d --rm --name admin \
+      --network srs-cloud_net \
+      -p 8000:8000 \
+      -e SPRING_PROFILES_ACTIVE=docker \
+      admin
+
 docker run -d --rm --name eureka \
       --network srs-cloud_net \
       -p 8761:8761 \

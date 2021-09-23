@@ -3,6 +3,7 @@ import org.springframework.boot.gradle.tasks.run.BootRun
 val springDocVersion = "1.5.10"
 val queryDslVersion = "4.4.0"
 val springCloudVersion = "2020.0.3"
+var springBootAdminVersion = "2.5.1"
 
 
 plugins {
@@ -123,12 +124,22 @@ subprojects {
         }
     }
 }
+project(":admin") {
+    apply(plugin = "org.springframework.boot")
+
+    dependencies {
+        implementation("de.codecentric:spring-boot-admin-starter-server:$springBootAdminVersion")
+        implementation("de.codecentric:spring-boot-admin-server-ui:$springBootAdminVersion")
+    }
+}
 
 project(":cloud:eureka") {
     apply(plugin = "org.springframework.boot")
 
     dependencies {
+        implementation("org.springframework.boot:spring-boot-starter-actuator")
         implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-server")
+        implementation("de.codecentric:spring-boot-admin-starter-client:$springBootAdminVersion")
 
         implementation("org.glassfish.jaxb:jaxb-runtime")
     }
@@ -138,6 +149,7 @@ project(":cloud:gateway") {
     apply(plugin = "org.springframework.boot")
 
     dependencies {
+        implementation("org.springframework.boot:spring-boot-starter-actuator")
         implementation("org.springframework.cloud:spring-cloud-starter-gateway")
         implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
 
@@ -191,6 +203,7 @@ project(":services:common") {
         implementation("org.springframework.boot:spring-boot-starter-validation")
         implementation("org.springframework.boot:spring-boot-starter-aop")
         implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+        implementation("org.springframework.boot:spring-boot-starter-actuator")
 
         implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
 

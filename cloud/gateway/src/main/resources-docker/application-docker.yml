@@ -4,10 +4,23 @@ server:
         key-store: classpath:keystore/gateway-local.p12
         key-store-password: Touchme7!!
         key-alias: localhost
+
+spring:
+    boot:
+        admin:
+            client:
+                auto-registration: true
+                url: http://admin:8000/
 management:
     endpoint:
         gateway:
             enabled: true # default: true
+        health:
+            show-details: always
+    endpoints:
+        web:
+            exposure:
+                include: "*"
 
 eureka:
     client:
