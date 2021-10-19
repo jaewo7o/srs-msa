@@ -128,6 +128,9 @@ project(":admin") {
     apply(plugin = "org.springframework.boot")
 
     dependencies {
+        // Spring Cloud
+        implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
+
         implementation("de.codecentric:spring-boot-admin-starter-server:$springBootAdminVersion")
     }
 }
@@ -136,6 +139,7 @@ project(":cloud:eureka") {
     apply(plugin = "org.springframework.boot")
 
     dependencies {
+        // Spring Cloud
         implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-server")
 
         // Spring Boot Actuator
@@ -150,6 +154,7 @@ project(":cloud:gateway") {
     apply(plugin = "org.springframework.boot")
 
     dependencies {
+        // Spring Cloud
         implementation("org.springframework.cloud:spring-cloud-starter-gateway")
         implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
 
@@ -204,6 +209,8 @@ project(":services:common") {
         implementation("org.springframework.boot:spring-boot-starter-validation")
         implementation("org.springframework.boot:spring-boot-starter-aop")
         implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+
+        // Spring Cloud
         implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
 
         // Spring Boot Actuator

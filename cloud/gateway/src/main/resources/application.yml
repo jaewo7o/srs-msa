@@ -3,7 +3,7 @@ server:
 
 spring:
     application:
-        name: gateway
+        name: gateway-server
     cloud:
         gateway:
             routes:
@@ -21,12 +21,6 @@ spring:
     output:
         ansi:
             enabled: always
-
-management:
-    endpoints:
-        web:
-            exposure:
-                include: gateway
 
 logging:
     level:

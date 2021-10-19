@@ -2,6 +2,12 @@ server:
     port: 8000
 
 spring:
+    application:
+        name: boot-admin
+    boot:
+        admin:
+            discovery:
+                ignored-services: boot-admin
     output:
         ansi:
             enabled: always

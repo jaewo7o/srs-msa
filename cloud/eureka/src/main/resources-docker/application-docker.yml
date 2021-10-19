@@ -4,6 +4,7 @@ spring:
             client:
                 auto-registration: true
                 url: http://admin:8000/
+
 management:
     endpoint:
         health:
@@ -12,3 +13,10 @@ management:
         web:
             exposure:
                 include: "*"
+
+eureka:
+    instance:
+        hostname: eureka
+    client:
+        register-with-eureka: false  # 유레카 서비스에 (자신을) 등록하지 않는다. (클러스터 모드가 아니므로)
+        fetch-registry: false  # 레지스트리 정보를 로컬에 캐싱하지 않는다. (클러스터 모드가 아니므로)

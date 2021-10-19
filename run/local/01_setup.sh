@@ -21,10 +21,3 @@ docker run -d --rm \
       -e MYSQL_USER=srs \
       -e MYSQL_PASSWORD=srs123!! \
       mariadb:10
-
-docker run -d --rm \
-      --name mongodb \
-      --network srs-network \
-      -p 27017:27017 \
-      -v ~/dev/workspace/srs-msa/data/mongodb/:/data/db \
-      mongo
