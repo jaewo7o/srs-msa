@@ -6,9 +6,7 @@ docker stop eureka;
 
 docker stop common;
 
-docker stop mongo;
-
-docker stop maria;
+docker stop mariadb;
 
 
 docker rmi admin;
@@ -19,9 +17,7 @@ docker rmi eureka;
 
 docker rmi common;
 
-docker rmi mongo;
-
-docker rmi maria;
+docker rmi mariadb;
 
 
 docker network rm srs-cloud_net;
