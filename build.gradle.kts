@@ -129,7 +129,6 @@ project(":admin") {
 
     dependencies {
         implementation("de.codecentric:spring-boot-admin-starter-server:$springBootAdminVersion")
-        implementation("de.codecentric:spring-boot-admin-server-ui:$springBootAdminVersion")
     }
 }
 
@@ -137,8 +136,10 @@ project(":cloud:eureka") {
     apply(plugin = "org.springframework.boot")
 
     dependencies {
-        implementation("org.springframework.boot:spring-boot-starter-actuator")
         implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-server")
+
+        // Spring Boot Actuator
+        implementation("org.springframework.boot:spring-boot-starter-actuator")
         implementation("de.codecentric:spring-boot-admin-starter-client:$springBootAdminVersion")
 
         implementation("org.glassfish.jaxb:jaxb-runtime")
@@ -149,12 +150,12 @@ project(":cloud:gateway") {
     apply(plugin = "org.springframework.boot")
 
     dependencies {
-        implementation("org.springframework.boot:spring-boot-starter-actuator")
         implementation("org.springframework.cloud:spring-cloud-starter-gateway")
         implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
 
         // Spring Boot Actuator
         implementation("org.springframework.boot:spring-boot-starter-actuator")
+        implementation("de.codecentric:spring-boot-admin-starter-client:$springBootAdminVersion")
 
         // SpringDoc (API Document)
         implementation("org.springdoc:springdoc-openapi-webflux-ui:$springDocVersion")
@@ -203,9 +204,11 @@ project(":services:common") {
         implementation("org.springframework.boot:spring-boot-starter-validation")
         implementation("org.springframework.boot:spring-boot-starter-aop")
         implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-        implementation("org.springframework.boot:spring-boot-starter-actuator")
-
         implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
+
+        // Spring Boot Actuator
+        implementation("org.springframework.boot:spring-boot-starter-actuator")
+        implementation("de.codecentric:spring-boot-admin-starter-client:$springBootAdminVersion")
 
         // SpringDoc (API Document)
         implementation("org.springdoc:springdoc-openapi-ui:$springDocVersion")

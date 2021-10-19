@@ -14,13 +14,6 @@ docker run -d --rm \
       -e MYSQL_PASSWORD=srs123!! \
       mariadb:10
 
-#docker run -d --rm \
-#      --name mongo \
-#      --network srs-cloud_net \
-#      -p 27017:27017 \
-#      -v ~/dev/data/mongo/:/data/db \
-#      mongo
-
 docker run -d --rm --name admin \
       --network srs-cloud_net \
       -p 8000:8000 \

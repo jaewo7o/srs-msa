@@ -1,6 +1,15 @@
 version: '2.1'
 
 services:
+    admin:
+        build: ../../admin
+        mem_limit: 350m
+        ports:
+            - "8000:8000"
+        environment:
+            - EUREKA_SERVICE_URL=http://eureka:8761
+        depends_on:
+            - eureka
     eureka:
         build: ../../cloud/eureka
         mem_limit: 350m
