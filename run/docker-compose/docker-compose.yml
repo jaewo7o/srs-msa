@@ -4,11 +4,16 @@ services:
     admin:
         build: ../../admin
         mem_limit: 350m
+        environment:
+            - SPRING_PROFILES_ACTIVE=docker
         ports:
             - "8000:8000"
+
     eureka:
         build: ../../cloud/eureka
         mem_limit: 350m
+        environment:
+            - SPRING_PROFILES_ACTIVE=docker
         ports:
             - "8761:8761"
 

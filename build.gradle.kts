@@ -131,6 +131,7 @@ project(":admin") {
         // Spring Cloud
         implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
 
+        // Spring Boot Actuator
         implementation("de.codecentric:spring-boot-admin-starter-server:$springBootAdminVersion")
     }
 }
