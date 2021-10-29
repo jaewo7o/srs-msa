@@ -15,16 +15,21 @@ spring:
         database: mysql
         database-platform: org.hibernate.dialect.MariaDB103Dialect
         hibernate:
-            ddl-auto: update
+            ddl-auto: none
         properties:
             hibernate:
                 jdbc:
                     batch_size: 200
                 order_inserts: true
                 order_updates: true
+    #Liquibase
+    liquibase:
+        change-log: classpath:/db/changelog/changelog-master.xml
+        enabled: true
     output:
         ansi:
             enabled: always
+
 springdoc:
     version: '0.0.1'
     default-consumes-media-type: application/json
