@@ -3,6 +3,7 @@ package com.jaewoo.srs.core.test
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.jaewoo.srs.core.context.SessionUser
 import com.jaewoo.srs.core.context.SrsContext
+import com.querydsl.jpa.impl.JPAQueryFactory
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.TestInstance
 import org.springframework.beans.factory.annotation.Autowired
@@ -24,6 +25,8 @@ class SpringTestSupport {
 
     @Autowired
     lateinit var objectMapper: ObjectMapper
+
+    protected val query: JPAQueryFactory by lazy { JPAQueryFactory(entityManager) }
 
     protected fun <T> save(entity: T): T {
         entityManager.persist(entity)

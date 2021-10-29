@@ -14,5 +14,10 @@ spring:
         restart:
             enabled: true
 
+eureka:
+    client:
+        register-with-eureka: false
+        fetch-registry: false
+
 logging:
     config: classpath:logback-test.xml

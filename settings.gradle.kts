@@ -12,7 +12,6 @@ pluginManagement {
 }
 
 include("services:api-core")
-include("services:api-test")
 include("services:common")
 include("cloud:eureka")
 include("cloud:gateway")

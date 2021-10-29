@@ -185,16 +185,9 @@ project(":services:api-core") {
         annotationProcessor(
             group = "com.querydsl", name = "querydsl-apt", classifier = "jpa"
         )
-    }
-}
 
-project(":services:api-test") {
-    dependencies {
-        implementation(project(":services:api-core"))
-
-        implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+        // Test Dependency
         implementation("org.springframework.boot:spring-boot-starter-test")
-        implementation("org.springframework.restdocs:spring-restdocs-mockmvc")
     }
 }
 
@@ -203,7 +196,6 @@ project(":services:common") {
 
     dependencies {
         implementation(project(":services:api-core"))
-        testImplementation(project(":services:api-test"))
 
         // Spring Boot
         implementation("org.springframework.boot:spring-boot-starter-web")
