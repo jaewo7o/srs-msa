@@ -22,10 +22,6 @@ spring:
                     batch_size: 200
                 order_inserts: true
                 order_updates: true
-    #Liquibase
-    liquibase:
-        change-log: classpath:/db/changelog/changelog-master.xml
-        enabled: true
     output:
         ansi:
             enabled: always

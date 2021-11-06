@@ -220,10 +220,10 @@ project(":services:common") {
             group = "com.querydsl", name = "querydsl-apt", classifier = "jpa"
         )
 
-        // Liquibase
-        implementation("org.liquibase:liquibase-core")
-
         // mariadb
         implementation("org.mariadb.jdbc:mariadb-java-client:2.4.1")
+
+        // h2 memory db test use
+        testImplementation("com.h2database:h2")
     }
 }
